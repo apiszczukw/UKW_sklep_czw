@@ -36,3 +36,12 @@ footer {
     }
 }
 
+footer a {
+
+    color: white;
+    margin-right: 2rem;
+}
+
+footer a:hover {
+    color: gray;
+}

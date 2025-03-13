@@ -1,20 +1,23 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using UKW_sklep_czw.DAL;
 
 namespace UKW_sklep_czw.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        FilmsContext db;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+		public HomeController(FilmsContext db)
+		{
+			this.db = db;
+		}
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
-            return View();
+            var kategorie = db.Categories.ToList();
+
+            return View(kategorie);
         }
 
         public IActionResult Privacy()
@@ -22,5 +25,9 @@ namespace UKW_sklep_czw.Controllers
             return View();
         }
 
+        public IActionResult footerSites(string viewName)
+        {
+            return View(viewName, db.Categories.ToList());
+        }
     }
 }

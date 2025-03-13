@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using UKW_sklep_czw.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "StaticSites",
+    pattern: "Info/{viewName}",
+    defaults: new { controller = "Home", action = "footerSites" }
+    );
 
 app.MapControllerRoute(
     name: "default",
