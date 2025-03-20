@@ -15,9 +15,9 @@ namespace UKW_sklep_czw.Controllers
 
 		public IActionResult Index()
         {
-            var kategorie = db.Categories.ToList();
+            //var kategorie = db.Categories.ToList();
 
-            return View(kategorie);
+			return View();
         }
 
         public IActionResult Privacy()
@@ -27,7 +27,7 @@ namespace UKW_sklep_czw.Controllers
 
         public IActionResult footerSites(string viewName)
         {
-            return View(viewName, db.Categories.ToList());
+            return View(viewName);
         }
     }
 }
