@@ -20,6 +20,7 @@
 				<td>@film.Director</td>
 				<td>@film.Description</td>
 				<td>@film.Price zł</td>
+				<td><a href="@Url.Action("Details", "Films", new { filmId = film.FilmId })"> 🔎 </a></td>
 			</tr>
 		}
 	</tbody>

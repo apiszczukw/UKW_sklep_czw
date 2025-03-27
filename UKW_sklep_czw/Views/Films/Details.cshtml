@@ -1,0 +1,20 @@
+﻿@model Film
+
+
+<table>
+	<tr>
+		<td>
+			<h2>@Model.Category.Name</h2>
+
+			@(await Component.InvokeAsync("SideMenu", new { categoryName = Model.Category.Name }))
+		</td>
+		<td>
+			<ul>
+				<li><b>Tytuł: </b>@Model.Title</li>
+				<li><b>Reżyser: </b>@Model.Director</li>
+				<li><b>Cena: </b>@Model.Price zł</li>
+				<li><b>Opis: </b>@Model.Description</li>
+			</ul>
+		</td>
+	</tr>
+</table>

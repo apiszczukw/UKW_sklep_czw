@@ -45,3 +45,13 @@ footer a {
 footer a:hover {
     color: gray;
 }
+
+td > a 
+{
+    text-decoration: none;
+}
+
+td li 
+{
+    list-style-type: bengali;
+}
