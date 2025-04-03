@@ -1,12 +1,15 @@
 ﻿@model Film
 
 
-<table>
+<table id="details">
 	<tr>
 		<td>
 			<h2>@Model.Category.Name</h2>
 
 			@(await Component.InvokeAsync("SideMenu", new { categoryName = Model.Category.Name }))
+		</td>
+		<td>
+			<img src="~/posters/@Model.Poster" height="250px" alt="Grafika @Model.Poster"/>
 		</td>
 		<td>
 			<ul>

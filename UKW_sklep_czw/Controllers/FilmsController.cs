@@ -33,5 +33,10 @@ namespace UKW_sklep_czw.Controllers
 
             return View(film);
         }
+
+        public IActionResult AllFilms()
+        {
+            return View(db.Films.ToList());
+        }
     }
 }

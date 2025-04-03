@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UKW_sklep_czw.DAL;
 
@@ -11,9 +12,10 @@ using UKW_sklep_czw.DAL;
 namespace UKW_sklep_czw.Migrations
 {
     [DbContext(typeof(FilmsContext))]
-    partial class FilmsContextModelSnapshot : ModelSnapshot
+    [Migration("20250403063825_postery")]
+    partial class postery
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,7 +292,7 @@ namespace UKW_sklep_czw.Migrations
                             CategoryId = 5,
                             Description = "Kultowy cyberpunkowy świat.",
                             Director = "Denis Villeneuve",
-                            Poster = "poster15.webp",
+                            Poster = "poster15.jpg",
                             Price = 32.99m,
                             Title = "Blade Runner 2049"
                         },
