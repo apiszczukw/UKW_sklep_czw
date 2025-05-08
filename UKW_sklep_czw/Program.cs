@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FilmsContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
-
+builder.Services.AddSession();
 
 
 
@@ -27,6 +27,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "Details",
