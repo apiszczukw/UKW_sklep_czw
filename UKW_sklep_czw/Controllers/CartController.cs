@@ -25,7 +25,9 @@ namespace UKW_sklep_czw.Controllers
         {
             CartManager.AddToCart(HttpContext.Session, filmId, db);
 
-            // on tutaj to "Cart" widzi jako argument do przekazania do metody
+            // PROBLEM Z ROUTINGIEM!!!!
+            // Zbyt ogólny dla kategorii i wyłapuje /Cart (czyli Index) jako nazwę kategorii
+            // Zmienić lub przenieść na koniec pod defaulta
             return RedirectToAction("Index");
         }
     }
