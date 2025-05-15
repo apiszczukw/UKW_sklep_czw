@@ -52,5 +52,32 @@ namespace UKW_sklep_czw.Infrastructure
 
             SessionHelper.SetObjectAsJson(session, cart, Consts.CartKey);
         }
+
+        public static int RemoveFromCart(ISession session, int filmId)
+        {
+            var cart = GetItems(session);
+
+            var thisFilm = cart.Find(i => i.Film.FilmId == filmId);
+
+            int ilosc = 0;
+
+            if (thisFilm == null)
+                return 0;
+
+            if (thisFilm.Quantity > 1)
+            {
+                thisFilm.Quantity--;
+
+                ilosc = thisFilm.Quantity;
+            }
+            else
+            {
+                cart.Remove(thisFilm);
+            }
+
+            session.SetObjectAsJson(cart, Consts.CartKey);
+
+            return ilosc;
+        }
     }
 }

@@ -18,7 +18,7 @@
 				<li><b>Cena: </b>@Model.Price zł</li>
 				<li><b>Opis: </b>@Model.Description</li>
 			</ul>
-			<p><a href="@Url.Action("AddToCart", "Cart", new {filmId = Model.FilmId})">🛒</a></p>
+			<p><a href="@Url.Action("AddToCart", "Cart", new {filmId = Model.FilmId, returnUrl = Url.Action("Details", "Films", new { filmId = Model.FilmId })})">🛒</a></p>
 		</td>
 	</tr>
 </table>

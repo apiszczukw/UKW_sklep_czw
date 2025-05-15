@@ -1,16 +1,51 @@
 ﻿@model IEnumerable<CartItem>
 
+@section Scripts
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(".trash").click(function ()
+		{
+			var cartItemId = $(this).data('id');
+
+			if(cartItemId != '')
+			{
+				$.post("/Cart/RemoveFromCart", { "id": cartItemId }, function (response)
+				{
+					if(response.itemQuantity == 0)
+					{
+						$("#cartItem-" + response.itemId).fadeOut("slow");
+					}
+					else
+					{
+						$("#itemQuantity-" + response.itemId).text(response.itemQuantity);
+					}
+
+					$("#total").text(response.cartValue);
+				});
+			}
+		});
+	</script>
+}
+
 <table class="table">
+	<tr>
+		<th>Nazwa produktu</th>
+		<th>Ilość produktu</th>
+		<th>Cena detaliczna</th>
+	</tr>
 	@foreach (var item in Model)
 	{
-		<tr>
+		<tr id="cartItem-@item.Film.FilmId">
 			<td>@item.Film.Title</td>
-			<td>@item.Quantity</td>
+			<td id="itemQuantity-@item.Film.FilmId">@item.Quantity</td>
 			<td>@item.Value</td>
+			<td><a class="trash" data-id="@item.Film.FilmId">🗑️</a></td>
 		</tr>
 	}
 </table>
 
 <div>
-	Razem: <span> @ViewBag.Total zł </span>
+	Razem: <span id="total"> @ViewBag.Total</span> zł
 </div>
