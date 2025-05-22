@@ -24,6 +24,18 @@
                 <a class="navbar-brand" href="#">Logo</a>
             </div>
             @(await Component.InvokeAsync("Menu"))
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="@Url.Action("Register", "Account")"><span class="glyphicon glyphicon-log-in"></span> Zarejestruj</a></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Logout", "Account")"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+                }
+            </ul>
         </div>
     </nav>
 
