@@ -1,8 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<div>
+﻿@model RegisterViewModel
+
+<div class="alert-warning">
     @ViewBag.msg
 </div>
+<div class="alert-warning">
+	@Html.ValidationSummary()
+</div>
+
+@using(Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+	<div style="padding: 3rem">
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.FirstName, "Podaj imię:") </b>
+			@Html.TextBoxFor(m => m.FirstName, new { @class="form-control"})
+		</div>
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.LastName, "Podaj nazwisko:") </b>
+			@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+		</div>
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.Email, "Podaj email:") </b>
+			@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @required = true })
+			<p class="alert-warning"> @Html.ValidationMessageFor(m => m.Email) </p>
+		</div>
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.UserName, "Podaj login:") </b>
+			@Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = true })
+			<p class="alert-warning"> @Html.ValidationMessageFor(m => m.UserName) </p>
+		</div>
+		
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.Password, "Podaj hasło:") </b>
+			@Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = true })
+			<p class="alert-warning"> @Html.ValidationMessageFor(m => m.Password) </p>
+		</div>
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.ConfirmPassword, "Powtórz hasło:") </b>
+			@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @required = true })
+			<p class="alert-warning"> @Html.ValidationMessageFor(m => m.ConfirmPassword) </p>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Zarejestruj</button>
+	</div>
+}

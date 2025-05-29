@@ -7,8 +7,10 @@
 @using(Html.BeginForm("AddFilm", "Films", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 	<div>
-		<div class="form-group"><b>@Html.LabelFor(m => m.NewFilm.Title, "Tytuł:") </b>
-			@Html.TextBoxFor(m => m.NewFilm.Title, new { @class="form-control", @required = true})</div>
+		<div class="form-group">
+			<b>@Html.LabelFor(m => m.NewFilm.Title, "Tytuł:") </b>
+			@Html.TextBoxFor(m => m.NewFilm.Title, new { @class="form-control", @required = true})
+		</div>
 		<div class="form-group">
 			<b>@Html.LabelFor(m => m.NewFilm.Director, "Reżyser:") </b>
 			@Html.TextBoxFor(m => m.NewFilm.Director, new { @class = "form-control", @required = true })

@@ -23,26 +23,47 @@ namespace UKW_sklep_czw.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Login()
+        [HttpGet]
+        public IActionResult Login()
         {
-            var result = await signInManager.PasswordSignInAsync("TestUser", "Test", false, false);
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
             if (result.Succeeded)
             {
                 ViewBag.msg = "Pomyślnie zalogowano";
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.msg = "Błędy: " + result;
+
+                ViewBag.msg = "Podano nieprawidłowy login lub hasło";
             }
 
             return View();
         }
 
-        public async Task<IActionResult> Register()
+        [HttpGet]
+        public IActionResult Register()
         {
+            return View();
+        }
 
-            var user = await userManager.FindByNameAsync("TestUser2");
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if(!ModelState.IsValid) 
+                return View(model);
+
+            var user = await userManager.FindByNameAsync(model.UserName);
 
             if (user != null)
             {
@@ -52,18 +73,32 @@ namespace UKW_sklep_czw.Controllers
             {
                 user = new AppUser()
                 {
-                    UserName = "TestUser2",
-                    Email = "testuser@ukw.edu.pl",
-                    FirstName = "Jan",
-                    LastName = "Kowalski"
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
                 };
 
-                var result = await userManager.CreateAsync(user, "Tes");
+                var result = await userManager.CreateAsync(user, model.Password);
 
-                ViewBag.msg = result.ToString();
+                if (result.Succeeded)
+                {
+                    ViewBag.msg = "Użytkownik pomyślnie zarejestrowany";
+
+                    await signInManager.SignInAsync(user, false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var errors = string.Join("\n", result.Errors.ToList().Select(e=> e.Description));
+
+                    ViewBag.msg = "Wystąpiły błędy:\n" + errors;
+
+                }
             }
+            return View(model);
 
-            return View();
         }
     }
 }
